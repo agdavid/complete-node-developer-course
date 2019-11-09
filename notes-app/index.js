@@ -4,10 +4,10 @@ const yargs = require('yargs')
 
 /*
     Commands: 
-    add
-    remove
-    read
-    list
+        - add
+        - remove
+        - read
+        - list
 */
 
 yargs
@@ -16,8 +16,22 @@ yargs
         {
             command: 'add',
             describe: 'Add a note',
-            handler: function () {
+            builder: {
+                title: {
+                    describe: 'Note title',
+                    demandOption: true,
+                    type: 'string'
+                },
+                body: {
+                    describe: 'Note body',
+                    demandOption: true,
+                    type: 'string'
+                }
+            },
+            handler: function (argv) {
                 console.log('Added a note');
+                console.log('Title:', argv.title);
+                console.log('Body:', argv.body);
             }
         })
     .command(
@@ -43,5 +57,4 @@ yargs
             handler: function () {
                 console.log('Listed all notes');
             }
-        })
-    .argv;
+        }).argv;
