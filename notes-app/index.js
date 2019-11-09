@@ -1,6 +1,7 @@
 // const chalk = require('chalk');
 // const validator = require('validator');
-const yargs = require('yargs')
+const yargs = require('yargs');
+const notes = require('./notes.js');
 
 /*
     Commands: 
@@ -29,9 +30,7 @@ yargs
                 }
             },
             handler: function (argv) {
-                console.log('Added a note');
-                console.log('Title:', argv.title);
-                console.log('Body:', argv.body);
+                notes.addNote(argv.title, argv.body);
             }
         })
     .command(
