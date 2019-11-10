@@ -6,12 +6,10 @@ const location = process.argv[2];
 if (location === undefined) {
     return console.log('No location provided, please try again');
 } else {
-    utils.geocode(location, (error, geoData) => {
+    utils.geocode(location, (error, { latitude, longitude, location }) => {
         if (error) {
             return console.log(error)
         }
-
-        const { latitude, longitude, location } = geoData;
 
         utils.forecast(latitude, longitude, (error, forecastData) => {
             if (error) {
