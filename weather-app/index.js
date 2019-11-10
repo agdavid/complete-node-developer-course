@@ -2,6 +2,7 @@ const request = require('request');
 const chalk = require('chalk');
 const env = require('dotenv').config({ path: '../.env' })
 
+const utils = require('./utils.js');
 
 const mapboxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}&limit=1`
 const darkSkyUrl = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET_KEY}/37.8267,-122.4233`;
@@ -25,26 +26,7 @@ const darkSkyUrl = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRE
 //     }
 // });
 
-// MapBox request
-
-request({
-    url: mapboxUrl,
-    json: true
-}, (error, response) => {
-    if (error) {
-        console.log('Unable to connect to map service');
-    } else {
-        const { features } = response.body;
-
-        if (features.length === 0) {
-            console.log('Unable to find map location');
-        } else {
-            const lat = features[0].center[1];
-            const lng = features[0].center[0];
-
-            console.log(features[0].text);
-            console.log(`Lat: ${lat}`);
-            console.log(`Lng: ${lng}`);
-        }
-    }
+utils.geocode('Boston', (error, data) => {
+    console.log('Error', error);
+    console.log('Data', data);
 });
