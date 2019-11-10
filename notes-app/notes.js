@@ -3,6 +3,7 @@ const chalk = require('chalk')
 
 module.exports = {
     addNote,
+    removeNote,
 }
 
 function addNote(title, body) {
@@ -22,6 +23,21 @@ function addNote(title, body) {
         console.log(chalk.green("New note added"));
     } else {
         console.log(chalk.red("Note title taken"));
+    }
+}
+
+function removeNote(title) {
+    const notes = loadNotes();
+
+    const locatedNote = notes.filter((note) => {
+        return note.title === title;
+    })
+
+    if (locatedNote.length === 0) {
+        console.log(chalk.red("Note title to remove does not exist"));
+    } else {
+        console.log(chalk.green("Note title to remove located"));
+        console.log(locatedNote[0].title);
     }
 }
 
