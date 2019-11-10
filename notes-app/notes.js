@@ -20,27 +20,25 @@ function addNote(title, body) {
         });
 
         saveNotes(notes);
-        console.log(chalk.green("New note added"));
+        console.log(chalk.green.inverse("New note added"));
     } else {
-        console.log(chalk.red("Note title taken"));
+        console.log(chalk.red.inverse("Note title taken"));
     }
 }
 
 function removeNote(title) {
     const notes = loadNotes();
 
-    const locatedNote = notes.filter((note) => {
-        return note.title === title;
+    const filteredNotes = notes.filter((note) => {
+        return note.title !== title;
     })
 
-    if (locatedNote.length === 0) {
-        console.log(chalk.red("Note title to remove does not exist"));
-    } else {
-        console.log(chalk.green("Note title to remove located"));
-        const filteredNotes = notes.filter((note) => {
-            return note.title !== title;
-        })
+    if (notes.length > filteredNotes.length) {
+        // original array larger than filtered array
+        console.log(chalk.green.inverse("Note title to remove located"));
         saveNotes(filteredNotes);
+    } else {
+        console.log(chalk.red.inverse("Note title to remove does not exist"));
     }
 }
 
