@@ -2,6 +2,7 @@ const request = require('request');
 
 module.exports = {
     geocode,
+    forecast,
 }
 
 function geocode(address, callback) {
@@ -26,3 +27,29 @@ function geocode(address, callback) {
         }
     });
 };
+
+function forecast(latitude, longitude, callback) {
+    const url = `https://api.darksky.net/forecast/${process.env.DARKSKY_SECRET_KEY}/${latitude},${longitude}`;
+
+    request({
+        url,
+        json: true
+    }, (error, response) => {
+        if (error) {
+            callback('Unable to connect to weather service', undefined);
+        } else if (response.body.error) {
+            callback('Unable to find weather location', undefined);
+        } else {
+            const { currently, daily } = response.body;
+            const { temperature, precipProbability, precipType } = currently;
+
+            const data = {
+                summary: daily.data[0].summary,
+                temperature,
+                precipProbability,
+                precipType,
+            }
+            callback(undefined, data);
+        }
+    })
+}
