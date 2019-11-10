@@ -37,7 +37,10 @@ function removeNote(title) {
         console.log(chalk.red("Note title to remove does not exist"));
     } else {
         console.log(chalk.green("Note title to remove located"));
-        console.log(locatedNote[0].title);
+        const filteredNotes = notes.filter((note) => {
+            return note.title !== title;
+        })
+        saveNotes(filteredNotes);
     }
 }
 
