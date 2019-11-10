@@ -8,5 +8,6 @@ request({
     json: true
 }, (error, response) => {
     const data = response.body;
-    console.log(data.currently);
+    const { temperature, precipProbability, precipType } = data.currently;
+    console.log(`It is currently ${temperature} degrees out. There is a ${precipProbability}% chance of ${precipType || 'precipitation'}. `)
 });
