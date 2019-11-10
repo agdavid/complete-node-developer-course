@@ -26,6 +26,7 @@ function geocode(address, callback) {
             callback(undefined, data);
         }
     });
+
 };
 
 function forecast(latitude, longitude, callback) {
