@@ -4,14 +4,13 @@ const chalk = require('chalk')
 module.exports = {
     addNote,
     removeNote,
+    listNotes,
 }
 
 function addNote(title, body) {
     const notes = loadNotes();
 
-    const duplicateNotes = notes.filter((note) => {
-        return note.title === title;
-    })
+    const duplicateNotes = notes.filter((note) => note.title === title);
 
     if (duplicateNotes.length === 0) {
         notes.push({
@@ -29,9 +28,7 @@ function addNote(title, body) {
 function removeNote(title) {
     const notes = loadNotes();
 
-    const filteredNotes = notes.filter((note) => {
-        return note.title !== title;
-    })
+    const filteredNotes = notes.filter((note) => note.title !== title);
 
     if (notes.length > filteredNotes.length) {
         // original array larger than filtered array
@@ -40,6 +37,12 @@ function removeNote(title) {
     } else {
         console.log(chalk.red.inverse("Note title to remove does not exist"));
     }
+}
+
+function listNotes() {
+    const notes = loadNotes();
+    console.log(chalk.inverse('Notes:'));
+    notes.forEach((note) => console.log(note));
 }
 
 function saveNotes(notes) {
