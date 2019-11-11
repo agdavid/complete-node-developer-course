@@ -4,12 +4,28 @@ const express = require('express');
 const app = express();
 const publicDirectoryPath = path.join(__dirname, '../public');
 
-app.use(express.static(publicDirectoryPath));
+app.set('view engine', 'hbs'); // set templating engine for /views
+app.use(express.static(publicDirectoryPath)); // serve static files
 
-// Express will never serve this explicit index path b/c it defaults to the static path
-// app.get('', (req, res) => {
-//     res.send('<h1>Hello Express!<h1>');
-// });
+app.get('', (req, res) => {
+    res.render('index', {
+        title: 'Weather App',
+        name: 'Thomas'
+    });
+});
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About',
+        name: 'Thomas'
+    })
+})
+
+app.get('/help', (req, res) => {
+    res.render('help', {
+        message: "We\'ll help you right away!"
+    })
+})
 
 app.get('/weather', (req, res) => {
     res.send({
