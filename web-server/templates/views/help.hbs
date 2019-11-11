@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About - Node Weather App</title>
+    <title>Help - Node Weather App</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-    <h1>{{ title }}</h1>
-    <p>Created by {{ name }}</p>
-    <img src="/img/small-image.jpeg">
+    {{>header}}
+    <p>{{ message }}</p>
+    {{>footer}}
 
 </body>
 
