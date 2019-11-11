@@ -1,21 +1,21 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
+const publicDirectoryPath = path.join(__dirname, '../public');
 
-app.get('', (req, res) => {
-    res.send('Hello Express!');
-});
+app.use(express.static(publicDirectoryPath));
 
-app.get('/about', (req, res) => {
-    res.send('About');
-});
+// Express will never serve this explicit index path b/c it defaults to the static path
+// app.get('', (req, res) => {
+//     res.send('<h1>Hello Express!<h1>');
+// });
 
 app.get('/weather', (req, res) => {
-    res.send('Get the Weather');
-});
-
-app.get('/help', (req, res) => {
-    res.send('Help Page');
+    res.send({
+        forecast: 'Mostly sunny',
+        location: 'Atlanta'
+    });
 });
 
 app.listen(3000, () => {
