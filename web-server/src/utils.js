@@ -7,7 +7,7 @@ module.exports = {
 
 function geocode(address, callback) {
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${process.env.MAPBOX_ACCESS_TOKEN}&limit=1`;
-
+    console.log(url);
     request({
         url,
         json: true
@@ -17,6 +17,7 @@ function geocode(address, callback) {
         } else if (body.features === undefined) {
             callback('Unable to find location, try another search', undefined);
         } else {
+            console.log(body.features[0]);
             const data = {
                 latitude: body.features[0].center[1],
                 longitude: body.features[0].center[0],
