@@ -46,6 +46,24 @@ app.get('/weather', (req, res) => {
     });
 });
 
+// add wildcard for sub-route of /help
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Thomas',
+        message: 'Help article not found'
+    })
+});
+
+// add wildcard route as catch-all for 404
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Thomas',
+        message: 'Page not found'
+    });
+});
+
 app.listen(3000, () => {
     console.log('Server is up on Port 3000');
 });
