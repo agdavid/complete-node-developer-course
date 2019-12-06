@@ -11,10 +11,10 @@
 // console.log(user);
 
 const product = {
-    label: 'Red notebook',
-    price: 3,
-    stock: 201,
-    salePrice: undefined
+  label: "Red notebook",
+  price: 3,
+  stock: 201,
+  salePrice: undefined
 };
 
 // const { label, price: productPrice, stock, salePrice, rating, fake = 5 } = product;
@@ -24,11 +24,12 @@ const product = {
 // console.log(productPrice);
 // console.log(fake);
 
-const transaction = (type, { label, stock }) => {
-    // const { label } = myProduct;
-    console.log(type);
-    console.log(label);
-    console.log(stock);
-}
+const transaction = (type, { label, stock = 0 } = {}) => {
+  // const { label } = myProduct;
+  console.log(type);
+  console.log(label);
+  console.log(stock);
+};
 
-transaction('order', product);
+transaction("order", product);
+// transaction("order");
